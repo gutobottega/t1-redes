@@ -1,0 +1,36 @@
+Construir um sniffer de rede que capture os pacotes que a placa de rede está
+enviando ou recebendo e apresente todos os campos de seus cabeçalhos para o usuário. O
+sniffer deverá apresentar o cabeçalho dos seguintes protocolos:
+    • Ethernet
+    • ARP
+    • IPv4
+    • IPv6
+    • ICMP
+    • ICMPv6
+    • UDP
+    • TCP
+Ao apresentar os campos dos cabeçalhos dos pacotes capturados, o sniffer deverá:
+    • identificar o protocolo de aplicação sendo usado (quando for uma aplicação
+    padrão Internet), como por exemplo porta 80 – protocolo HTTP;
+    • mostrar os campos da forma adequada:
+o Exemplos:
+    ▪ Campos apresentados em decimal: endereços IPv4 (bytes
+    separados por ponto), portas, tamanho, identificação, entre
+    outros;
+    ▪ Campos em hexadecimal: endereços MAC (campos
+    separados por dois pontos), endereços IPv6 (campos
+    separados por dois pontos), entre outros.
+Ao final o sniffer deverá apresentar estatísticas de uso dos protocolos capturados.
+As seguintes estatísticas devem ser mostradas:
+    • Total de pacotes capturados
+    • % de pacotes ARP
+    • % de pacotes IPv4
+    • % de pacotes IPv6
+    • % de pacotes ICMP
+    • % de pacotes ICMPv6
+    • % de pacotes TCP
+    • % de pacotes UDP
+    • Protocolo de aplicação mais usado nas transmissões
+    • Protocolo de aplicação mais usado nas recepções
+    • Endereço IP da máquina que mais transmitiu pacotes
+    • Endereço IP da máquina que mais recebeu pacotes
