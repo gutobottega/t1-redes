@@ -3,6 +3,22 @@ PARA RODAR:
 ~sudo ./executavel
 
 
+Capturar os pacotes e mostrar todos os cabeçalhos
+ - para isso será necessário ifs para a identificação de cada protocolo
+Durante a identificação de cada protocolo é preciso contadores para cada um deles, que no final sera exibido com o total de cada um
+
+Ethernet
+ - 6 bytes para MAC destino
+ - 6 bytes para MAC origem
+ - 2 bytes
+capturar o pacote
+percorre o vetor e pegar o tipo 
+com tipo fazer um if pra checar qual protocolo
+ -0800 = IPv4
+ -0806 = ARP
+ -86dd = IPv6 
+
+
 Construir um sniffer de rede que capture os pacotes que a placa de rede está
 enviando ou recebendo e apresente todos os campos de seus cabeçalhos para o usuário. O
 sniffer deverá apresentar o cabeçalho dos seguintes protocolos:
