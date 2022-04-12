@@ -1,3 +1,8 @@
+PARA RODAR:
+~gcc -o executavel recepcao_socket.c
+~sudo ./executavel
+
+
 Construir um sniffer de rede que capture os pacotes que a placa de rede está
 enviando ou recebendo e apresente todos os campos de seus cabeçalhos para o usuário. O
 sniffer deverá apresentar o cabeçalho dos seguintes protocolos:
