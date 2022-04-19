@@ -2,6 +2,8 @@ PARA RODAR:
 ~gcc -o executavel recepcao_socket.c
 ~sudo ./executavel
 
+PARA PESQUISAR OS NUMEROS DOS PACOTES:
+https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers
 
 Capturar os pacotes e mostrar todos os cabeçalhos
  - para isso será necessário ifs para a identificação de cada protocolo

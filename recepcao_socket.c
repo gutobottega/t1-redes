@@ -9,6 +9,7 @@
 #include <sys/ioctl.h>
 #include <string.h>
 #include <unistd.h>
+#define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
 
 /* Diretorios: net, netinet, linux contem os includes que descrevem */
 /* as estruturas de dados do header dos protocolos   	  	        */
@@ -30,6 +31,36 @@
   int sockd;
   int on;
   struct ifreq ifr;
+
+void ipv6(){
+	//UDP
+	if(buff1[20] == '11'){
+
+	}
+	//TCP
+	else if(buff1[20] == '06' ){
+		
+	}
+	//ICMPV6
+	else if(buff1[20] == '3a' ){
+		
+	}
+}
+
+void ipv4(){
+	//UDP
+	if(buff1[24] == '11'){
+
+	}
+	//TCP
+	else if(buff1[24] == '06' ){
+		
+	}
+	//ICMP
+	else if(buff1[24] == '01' ){
+		
+	}
+}
 
 int main(int argc,char *argv[])
 {
@@ -55,5 +86,18 @@ int main(int argc,char *argv[])
 		// impress�o do conteudo - exemplo Endereco Destino e Endereco Origem
 		printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
 		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n\n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
+		
+		
+		// IPv6
+		if(buff1[12] == '86' && buff1[13] == 'dd'){
+			ipv6()
+		}
+		// ARP
+		else if(buff1[12] == '08' && buff1[13] == '06'){
+			arp()
+		}
+		else if(buff1[12] == '08' && buff1[13] == '00'){
+			ipv4()
+		}
 	}
 }
