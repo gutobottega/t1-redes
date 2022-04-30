@@ -32,33 +32,74 @@
   int on;
   struct ifreq ifr;
 
-void ipv6(){
-	//UDP
-	if(buff1[20] == '11'){
+// Contadores:
+int totalCounter = 0;
+int ipv4Counter = 0;
+int ipv6Counter = 0;
+int arpCounter = 0;
+int icmpCounter = 0;
+int icmpv6Counter = 0;
+int tcpCounter = 0;
+int udpCounter = 0;
+
+void aplicacao(){
+	switch(){
 
 	}
+}
+
+void tcp(){
+	//TODO: Exibir todos protocolos até aqui
+	tcpCounter++;
+
+	//TODO: Verificar protocolos de aplicação com base na porta, tanto de destino(pos 25 e 26) como origem(pos 23 e 24)
+	if(buff1[23] == )
+	buff1[23] == 
+}
+
+void udp(){
+	//TODO: Verificar protocolos de aplicação com base na porta, tanto de destino(pos 25 e 26) como origem(pos 23 e 24)
+	//TODO: Exibir todos protocolos até aqui
+	udpCounter++;
+}
+
+void arp(){
+	//TODO: Exibir todos protocolos até aqui
+	arpCounter++;
+}
+
+void ipv6(){
+	ipv6Counter++;
+	//UDP
+	if(buff1[20] == 0x11){
+		udp();
+	}
 	//TCP
-	else if(buff1[20] == '06' ){
-		
+	else if(buff1[20] == 0x06 ){
+		tcp()
+
 	}
 	//ICMPV6
-	else if(buff1[20] == '3a' ){
-		
+	else if(buff1[20] == 0x3a ){
+		//TODO: Exibir todos protocolos até aqui
+		icmpv6Counter++;
 	}
 }
 
 void ipv4(){
+	ipv4Counter++;
 	//UDP
-	if(buff1[24] == '11'){
-
+	if(buff1[24] == 0x11){
+		udp();
 	}
 	//TCP
-	else if(buff1[24] == '06' ){
-		
+	else if(buff1[24] == 0x06 ){
+		tcp();
 	}
 	//ICMP
-	else if(buff1[24] == '01' ){
-		
+	else if(buff1[24] == 0x01 ){
+		//TODO: Exibir todos protocolos até aqui
+		icmpCounter++;
 	}
 }
 
@@ -73,8 +114,8 @@ int main(int argc,char *argv[])
     }
 
 	// O procedimento abaixo eh utilizado para "setar" a interface em modo promiscuo
-	strcpy(ifr.ifr_name, "eth0");
-	if(ioctl(sockd, SIOCGIFINDEX, &ifr) < 0)
+	strcpy(ifr.ifr_name, "wlp2s0");
+	if(ioctl(sockd, SIOCGIFiINDEX, &ifr) < 0)
 		printf("erro no ioctl!");
 	ioctl(sockd, SIOCGIFFLAGS, &ifr);
 	ifr.ifr_flags |= IFF_PROMISC;
@@ -84,20 +125,28 @@ int main(int argc,char *argv[])
 	while (1) {
    		recv(sockd,(char *) &buff1, sizeof(buff1), 0x0);
 		// impress�o do conteudo - exemplo Endereco Destino e Endereco Origem
-		printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
-		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n\n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
+		//printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
+		//printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n\n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
 		
+		//printf("%x:%x\n", buff1[12], buff1[13]);
 		
 		// IPv6
-		if(buff1[12] == '86' && buff1[13] == 'dd'){
-			ipv6()
+		if(buff1[12] == 0x86 && buff1[13] == 0xdd){
+			totalCounter++;
+			ipv6();
+			printf("ipv6");
 		}
 		// ARP
-		else if(buff1[12] == '08' && buff1[13] == '06'){
-			arp()
+		else if(buff1[12] == 0x08 && buff1[13] == 0x06){
+			totalCounter++;
+			arp();
+			printf("arp");
 		}
-		else if(buff1[12] == '08' && buff1[13] == '00'){
-			ipv4()
+		//IPV4
+		else if(buff1[12] == 0x08 && buff1[13] == 0x00){
+			totalCounter++;
+			ipv4();
+			printf("ipv4");
 		}
 	}
 }
